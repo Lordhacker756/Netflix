@@ -24,11 +24,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
+    marginBottom: 10,
     backgroundColor: '#000',
   },
   logo: {
     height: 30,
-    width: 30,
+    width: '10%',
     resizeMode: 'contain',
   },
   navLinks: {

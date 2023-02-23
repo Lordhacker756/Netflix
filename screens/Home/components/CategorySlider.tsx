@@ -14,7 +14,6 @@ interface CategorySliderProps {
 
 const CategorySlider = (props: CategorySliderProps) => {
   const {title, movies} = props.category;
-  console.log(movies);
   return (
     <View style={styles.container}>
       <View style={styles.title}>
