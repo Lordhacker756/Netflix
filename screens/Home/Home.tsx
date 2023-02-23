@@ -2,10 +2,12 @@ import {View, Text, StyleSheet, FlatList} from 'react-native';
 import React from 'react';
 import categories from '../../data/categories';
 import CategorySlider from './components/CategorySlider';
+import Header from '../../common/Header';
 
 const Home = () => {
   return (
     <View style={styles.pageContainer}>
+      <Header />
       <FlatList
         data={categories.items}
         renderItem={({item}) => <CategorySlider category={item} />}
