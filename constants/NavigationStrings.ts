@@ -6,4 +6,6 @@ export default {
     COMINGSOON: 'Coming Soon',
     SEARCH: 'Search',
     DOWNLOADS: 'Downloads',
+    LOGIN: 'Login',
+    MAIN: 'Main',
 };
