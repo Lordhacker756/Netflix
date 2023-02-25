@@ -5,6 +5,7 @@ import {
   Image,
   Pressable,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
 import data from '../../data/movie';
@@ -15,8 +16,6 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons/';
 import Thumbs from 'react-native-vector-icons/FontAwesome5';
 import {Picker} from '@react-native-picker/picker';
 import EpisodeCard from './Components/EpisodeCard';
-import Movie from '../../data/movie';
-import {useNavigation} from '@react-navigation/native';
 
 interface Movie {
   id: string;
@@ -44,11 +43,11 @@ interface Movie {
   };
 }
 
-const Details = () => {
-  const navigation = useNavigation();
+const Details = ({navigation}) => {
   const [isMute, setIsMute] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
+  const [season, setSeason] = useState('Season 1');
   return (
     <ScrollView
       stickyHeaderIndices={[0]}
@@ -147,15 +146,30 @@ const Details = () => {
       </View>
       <Picker
         style={styles.picker}
-        selectedValue="Season 1"
-        onValueChange={(itemValue, itemIndex) => {}}>
+        selectedValue={season}
+        onValueChange={(itemValue, itemIndex) => {
+          setSeason(itemValue);
+        }}>
         <Picker.Item label="Season 1" value="Season 1" />
         <Picker.Item label="Season 2" value="Season 2" />
-        <Picker.Item label="Season 3" value="Season 3" />
-        <Picker.Item label="Season 4" value="Season 4" />
       </Picker>
       <View style={styles.episodeContainer}>
-        <EpisodeCard />
+        <FlatList
+          data={
+            season === 'Season 1'
+              ? data.seasons.items[0].episodes.items
+              : data.seasons.items[1].episodes.items
+          }
+          renderItem={({item}) => (
+            <EpisodeCard
+              title={item.title}
+              poster={item.poster}
+              duration={item.duration}
+              plot={item.plot}
+            />
+          )}
+          showsVerticalScrollIndicator={false}
+        />
       </View>
     </ScrollView>
   );
@@ -355,6 +369,10 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  episodeContainer: {
+    flex: 1,
+    marginBottom: 60,
   },
 });
 
