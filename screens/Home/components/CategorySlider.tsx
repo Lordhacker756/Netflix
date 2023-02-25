@@ -1,6 +1,6 @@
-import {StyleSheet, Text, View, Image, FlatList} from 'react-native';
+import {StyleSheet, Text, View, Image, FlatList, Pressable} from 'react-native';
 import React from 'react';
-
+import {useNavigation} from '@react-navigation/native';
 interface CategorySliderProps {
   category: {
     id: string;
@@ -13,6 +13,7 @@ interface CategorySliderProps {
 }
 
 const CategorySlider = (props: CategorySliderProps) => {
+  const navigation = useNavigation();
   const {title, movies} = props.category;
   return (
     <View style={styles.container}>
@@ -22,9 +23,11 @@ const CategorySlider = (props: CategorySliderProps) => {
       <FlatList
         data={movies}
         renderItem={({item}) => (
-          <View style={styles.imageContainer}>
+          <Pressable
+            style={styles.imageContainer}
+            onPress={() => navigation.navigate('Details')}>
             <Image style={styles.image} source={{uri: item.poster}} />
-          </View>
+          </Pressable>
         )}
         horizontal
         keyExtractor={item => item.id}

@@ -14,8 +14,38 @@ import Octicons from 'react-native-vector-icons/Octicons/';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons/';
 import Thumbs from 'react-native-vector-icons/FontAwesome5';
 import {Picker} from '@react-native-picker/picker';
+import EpisodeCard from './Components/EpisodeCard';
+import Movie from '../../data/movie';
+import {useNavigation} from '@react-navigation/native';
+
+interface Movie {
+  id: string;
+  title: string;
+  year: number;
+  numberOfSeasons: number;
+  plot: string;
+  cast: string;
+  creator: string;
+  seasons: {
+    items: {
+      id: string;
+      name: string;
+      episodes: {
+        items: {
+          id: string;
+          title: string;
+          poster: string;
+          duration: string;
+          plot: string;
+          video: string;
+        }[];
+      };
+    }[];
+  };
+}
 
 const Details = () => {
+  const navigation = useNavigation();
   const [isMute, setIsMute] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [isAdded, setIsAdded] = useState(false);
@@ -26,7 +56,9 @@ const Details = () => {
       showsVerticalScrollIndicator={false}>
       <View>
         <View style={styles.header}>
-          <Icon name="chevron-left" size={30} color="white" />
+          <Pressable onPress={() => navigation.navigate('Home')}>
+            <Icon name="chevron-left" size={30} color="white" />
+          </Pressable>
           <Icon name="cast" size={30} color="white" />
         </View>
       </View>
@@ -104,6 +136,27 @@ const Details = () => {
           <Text style={styles.buttonText}>Share</Text>
         </Pressable>
       </View>
+
+      <View style={styles.episodeOpions}>
+        <Pressable style={styles.episodeBtn}>
+          <Text style={styles.episodeText}>Episodes</Text>
+        </Pressable>
+        <Pressable style={styles.more}>
+          <Text style={styles.moreText}>More Like This</Text>
+        </Pressable>
+      </View>
+      <Picker
+        style={styles.picker}
+        selectedValue="Season 1"
+        onValueChange={(itemValue, itemIndex) => {}}>
+        <Picker.Item label="Season 1" value="Season 1" />
+        <Picker.Item label="Season 2" value="Season 2" />
+        <Picker.Item label="Season 3" value="Season 3" />
+        <Picker.Item label="Season 4" value="Season 4" />
+      </Picker>
+      <View style={styles.episodeContainer}>
+        <EpisodeCard />
+      </View>
     </ScrollView>
   );
 };
@@ -120,6 +173,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 20,
+    backgroundColor: 'rgba(0,0,0,0.8)',
   },
   trailerContainer: {
     height: 300,
@@ -244,7 +298,6 @@ const styles = StyleSheet.create({
   buttonGroup: {
     flexDirection: 'row',
     justifyContent: 'space-evenly',
-    marginVertical: 10,
     gap: 10,
   },
   button: {
@@ -252,7 +305,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     borderRadius: 5,
-    marginVertical: 5,
+    marginVertical: 0,
     flex: 1,
   },
   buttonText: {
@@ -260,6 +313,48 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontWeight: 'bold',
     margin: 5,
+  },
+  episodeOpions: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    marginHorizontal: 20,
+    gap: 10,
+    width: '80%',
+  },
+  episodeBtn: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderTopColor: 'red',
+    borderTopWidth: 5,
+    width: '35%',
+  },
+  episodeText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 5,
+  },
+  more: {
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+    flex: 1,
+  },
+  moreText: {
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+    margin: 5,
+  },
+  picker: {
+    width: '50%',
+    color: 'white',
+    marginHorizontal: 20,
+    marginTop: 10,
+  },
+  pickerItem: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
 

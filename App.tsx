@@ -1,8 +1,7 @@
-import {View, Text} from 'react-native';
 import React, {useState, useEffect} from 'react';
-import Home from './screens/Home/Home';
 import SplashScreen from './common/SplashScreen';
-import Details from './screens/Details/Details';
+import Routes from './Navigation/Routes';
+
 const App = () => {
   const [showSplash, setShowSplash] = useState(true);
 
@@ -12,7 +11,7 @@ const App = () => {
     }, 1000);
   }, []);
 
-  return showSplash ? <SplashScreen /> : <Details />;
+  return showSplash ? <SplashScreen /> : <Routes />;
 };
 
 export default App;
