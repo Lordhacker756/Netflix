@@ -25,7 +25,7 @@ The Home screen displays a list of movies and TV shows available on Netflix. You
 <img src="./assets/Details.jpg" style="height:600px">
 
 The Details screen displays more information about a selected movie or TV show, including the title, year of release, rating, and a brief synopsis.
-<img src="./assets/Episode.jpg" style="height:600px">
+<img src="./assets/Episodes.jpg" style="height:600px">
 
 ## Dependencies
 
