@@ -17,11 +17,16 @@ Once the app is running, you can use the bottom navigation to switch between the
 
 ### Home Screen
 
+[Home Screen](./assets/Home.jpg)
+
 The Home screen displays a list of movies and TV shows available on Netflix. You can scroll through the list and tap on a movie or TV show to view more details.
 
 ### Details Screen
+[Details Screen](./assets/Details.jpg)
 
 The Details screen displays more information about a selected movie or TV show, including the title, year of release, rating, and a brief synopsis.
+
+[Episode Screen](./assets/Episode.jpg)
 
 ## Dependencies
 
