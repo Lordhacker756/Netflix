@@ -10,6 +10,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "@react-native-picker/picker": "^2.4.8",
     "react": "18.2.0",
     "react-native": "0.71.3",
     "react-native-vector-icons": "^9.2.0"

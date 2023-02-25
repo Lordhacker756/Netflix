@@ -5,7 +5,6 @@ import {
   Image,
   Pressable,
   ScrollView,
-  FlatList,
 } from 'react-native';
 import React, {useState} from 'react';
 import data from '../../data/movie';
@@ -13,9 +12,13 @@ import Icon from 'react-native-vector-icons/Feather/';
 import Ionicon from 'react-native-vector-icons/Ionicons/';
 import Octicons from 'react-native-vector-icons/Octicons/';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons/';
+import Thumbs from 'react-native-vector-icons/FontAwesome5';
+import {Picker} from '@react-native-picker/picker';
 
 const Details = () => {
   const [isMute, setIsMute] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isAdded, setIsAdded] = useState(false);
   return (
     <ScrollView
       stickyHeaderIndices={[0]}
@@ -72,12 +75,28 @@ const Details = () => {
         <Text style={styles.creator}>Creator: {data.creator}</Text>
       </View>
       <View style={styles.buttonGroup}>
-        <Pressable style={styles.button}>
-          <Icon name="plus" size={30} color="white" />
+        <Pressable
+          style={styles.button}
+          onPress={() => {
+            setIsAdded(!isAdded);
+          }}>
+          {isAdded ? (
+            <Octicons name="checklist" size={30} color="red" />
+          ) : (
+            <Icon name="plus" size={30} color="white" />
+          )}
           <Text style={styles.buttonText}>My List</Text>
         </Pressable>
-        <Pressable style={styles.button}>
-          <Icon name="thumbs-up" size={30} color="white" />
+        <Pressable
+          style={styles.button}
+          onPress={() => {
+            setIsLiked(!isLiked);
+          }}>
+          {isLiked ? (
+            <Icon name="thumbs-up" size={30} color="red" />
+          ) : (
+            <Icon name="thumbs-up" size={30} color="white" />
+          )}
           <Text style={styles.buttonText}>Rate</Text>
         </Pressable>
         <Pressable style={styles.button}>
@@ -139,7 +158,7 @@ const styles = StyleSheet.create({
     bottom: 20,
   },
   detailsContainer: {
-    padding: 20,
+    padding: 15,
   },
   showName: {
     color: 'white',
